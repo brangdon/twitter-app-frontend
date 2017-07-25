@@ -21,32 +21,36 @@ class Create_Message extends Component {
 
         var currentDate = new Date();
 
-        axios.post('/post-message', {
-            userName: this.state.name,
-            content: this.state.content,
-            date: currentDate.toISOString(),
-            hour: currentDate.getHours() + ":" + currentDate.getMinutes()
-        })
-            .then(function (response) {
-
-
-                if(!_this.state.loaded){
-                    _this.props.setName(response.data)
-
-                    _this.setState({
-                        loaded: true,
-                        name: response.data
-                    })
-                }
-                console.log('message user')
-                console.log(_this.state.name);
-                _this.props.getMessages()
-
-
+        if (this.state.content.length <= 140) {
+            axios.post('/post-message', {
+                userName: this.state.name,
+                content: this.state.content,
+                date: currentDate.toISOString(),
+                hour: currentDate.getHours() + ":" + currentDate.getMinutes()
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .then(function (response) {
+
+
+                    if (!_this.state.loaded) {
+                        _this.props.setName(response.data)
+
+                        _this.setState({
+                            loaded: true,
+                            name: response.data
+                        })
+                    }
+                    console.log('message user')
+                    console.log(_this.state.name);
+                    _this.props.getMessages()
+
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        } else {
+            console.log('message extends 140 chars')
+        }
 
 
         console.log('post message')
@@ -61,8 +65,8 @@ class Create_Message extends Component {
         return (
             <div className="create-message">
                 <h3>Create Message</h3>
-                <input type="text"                           onChange={this.handleChangeContent} placeholder="content"/>
-                    <button type="submit" onClick={this.justSubmitted}>Create message!</button>
+                <input type="text" onChange={this.handleChangeContent} placeholder="content"/>
+                <button onClick={this.justSubmitted}>Create message!</button>
             </div>
         );
     }
