@@ -1,0 +1,39 @@
+
+.container{
+width: 80%;
+    margin: 0 auto;
+}
+
+.message{
+    padding: 3%;
+    background-color: antiquewhite;
+    margin-bottom: 3%;
+}
+
+.timeline{
+    background-color: darkturquoise;
+    padding: 5%;
+}
+
+.wall{
+    background-color: gold;
+    padding: 5%;
+}
+
+.create-message{
+    background-color: lime;
+    padding: 5%;
+}
+
+.info{
+    background-color: greenyellow;
+    padding: 5%;
+}
+
+.message a{
+    color: red;
+}
+
+.message a:hover{
+    text-decoration: none;
+}
